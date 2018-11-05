@@ -1,21 +1,26 @@
 declare-option -docstring 'Line number highlighter parameters' str-list number_toggle_params
 
+define-command -params 0.. -hidden _number_toggle_update %{
+  remove-highlighter window/_number-toggle
+  add-highlighter window/_number-toggle number-lines %arg{@} %opt{number_toggle_params}
+}
+
+define-command -params 0 -hidden _number_toggle_hook_focus %{
+  remove-hooks window _number-toggle
+  hook -group _number-toggle window FocusOut .* %{ _number_toggle_update }
+  hook -group _number-toggle window FocusIn .* %{ _number_toggle_update '-relative' }
+}
+
 hook global WinCreate .* %{
-  evaluate-commands %sh{
-    echo "add-highlighter window/number-toggle number-lines -relative $kak_opt_number_toggle_params"
-  }
+  _number_toggle_update '-relative'
+  _number_toggle_hook_focus
 }
 
-hook global ModeChange normal:insert %{
-  remove-highlighter window/number-toggle
-  evaluate-commands %sh{
-    echo "add-highlighter window/number-toggle number-lines $kak_opt_number_toggle_params"
-  }
+hook global InsertBegin .* %{
+  _number_toggle_update
 }
 
-hook global ModeChange insert:normal %{
-  remove-highlighter window/number-toggle
-  evaluate-commands %sh{
-    echo "add-highlighter window/number-toggle number-lines -relative $kak_opt_number_toggle_params"
-  }
+hook global InsertEnd .* %{
+  _number_toggle_update '-relative'
+  _number_toggle_hook_focus
 }

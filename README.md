@@ -29,7 +29,7 @@ source ~/.config/kak/plugins/number-toggle.kak
 
 ## Options
 
-- `number_toggle_params` - Line number highlighter parameters (default empty)
+- `number_toggle_params` - Line number highlighter parameters (str-list, default empty)
 
 ```kakoune
 # Example of enabling `-hlcursor` and `-separator ' '` parameters
