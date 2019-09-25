@@ -1,4 +1,4 @@
-# kakoune-number-toggle
+# number-toggle.kak
 
 Toggles between relative and absolute line numbers automatically based on the current mode. Absolute line numbers are displayed in insert mode, and relative line numbers are displayed in all other modes.
 
@@ -9,7 +9,7 @@ Toggles between relative and absolute line numbers automatically based on the cu
 With plug.kak installed, add to your `kakrc` file:
 
 ```kakoune
-plug 'evanrelf/kakoune-number-toggle'
+plug "evanrelf/number-toggle.kak"
 ```
 
 ### Manually
@@ -18,7 +18,7 @@ Download plugin:
 
 ```bash
 $ mkdir -p ~/.config/kak/plugins/
-$ curl -L https://raw.githubusercontent.com/evanrelf/kakoune-number-toggle/master/rc/number-toggle.kak -o ~/.config/kak/plugins/number-toggle.kak
+$ curl -L https://raw.githubusercontent.com/evanrelf/number-toggle.kak/master/rc/number-toggle.kak -o ~/.config/kak/plugins/number-toggle.kak
 ```
 
 Add to your `kakrc` file:
