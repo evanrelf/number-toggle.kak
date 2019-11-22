@@ -16,11 +16,11 @@ hook global WinCreate .* %{
   number_toggle_hook_focus
 }
 
-hook global InsertBegin .* %{
+hook global ModeChange push:.*:insert %{
   number_toggle_update
 }
 
-hook global InsertEnd .* %{
+hook global ModeChange pop:insert:.* %{
   number_toggle_update '-relative'
   number_toggle_hook_focus
 }
