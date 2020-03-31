@@ -1,32 +1,46 @@
 declare-option -docstring 'Line number highlighter parameters' str-list number_toggle_params
 
-# Update line number highlighters
-define-command -params 0.. -hidden number-toggle-update %{
-  add-highlighter -override window/number-toggle number-lines %arg{@} %opt{number_toggle_params}
+declare-option -hidden -docstring 'number-toggle.kak plug internal state' str _number_toggle_internal '-relative'
+
+define-command -hidden -docstring "_number-toggle-refresh: Update line number highlighters" \
+_number-toggle-refresh -params 0 %{ evaluate-commands %sh{
+  printf '%s' "add-highlighter -override window/number-toggle number-lines $kak_opt_number_toggle_params $kak_opt__number_toggle_internal"
+}}
+
+define-command -hidden -docstring "_number-toggle-install-focus-hooks: Install hooks to use absolute line numbering when window is out of focus" \
+_number-toggle-install-focus-hooks -params 0 %{
+  hook -group number-toggle-focus window FocusOut .* %{
+    set-option window _number_toggle_internal ''
+    _number-toggle-refresh
+  }
+  hook -group number-toggle-focus window FocusIn .* %{
+    set-option window _number_toggle_internal '-relative'
+    _number-toggle-refresh
+  }
 }
 
-# Install hooks that change line numbering in reaction to changes in focus
-define-command -params 0 -hidden number-toggle-hook-focus %{
-  # Remove existing hooks
-  remove-hooks window number-toggle
-  # Install new hooks
-  hook -group number-toggle window FocusOut .* %{ number-toggle-update }
-  hook -group number-toggle window FocusIn .* %{ number-toggle-update '-relative' }
+define-command -hidden -docstring "_number-toggle-uninstall-focus-hooks: Uninstall hooks to use absolute line numbering when window is out of focus" \
+_number-toggle-uninstall-focus-hooks -params 0 %{
+  remove-hooks window number-toggle-focus
 }
 
 # Display relative line numbers when starting Kakoune in normal mode
 hook global WinCreate .* %{
-  number-toggle-update '-relative'
-  number-toggle-hook-focus
+  set-option window _number_toggle_internal '-relative'
+  _number-toggle-refresh
+  _number-toggle-install-focus-hooks
 }
 
 # Display absolute line numbers when entering insert mode
 hook global ModeChange push:.*:insert %{
-  number-toggle-update
+  set-option window _number_toggle_internal ''
+  _number-toggle-refresh
+  _number-toggle-uninstall-focus-hooks
 }
 
 # Display relative line numbers when leaving insert mode
 hook global ModeChange pop:insert:.* %{
-  number-toggle-update '-relative'
-  number-toggle-hook-focus
+  set-option window _number_toggle_internal '-relative'
+  _number-toggle-refresh
+  _number-toggle-install-focus-hooks
 }
