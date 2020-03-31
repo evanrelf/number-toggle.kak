@@ -2,10 +2,7 @@ declare-option -docstring 'Line number highlighter parameters' str-list number_t
 
 # Update line number highlighters
 define-command -params 0.. -hidden number-toggle-update %{
-  # Remove existing highlighter
-  remove-highlighter window/number-toggle
-  # Install new highlighter
-  add-highlighter window/number-toggle number-lines %arg{@} %opt{number_toggle_params}
+  add-highlighter -override window/number-toggle number-lines %arg{@} %opt{number_toggle_params}
 }
 
 # Install hooks that change line numbering in reaction to changes in focus
