@@ -4,7 +4,7 @@ Toggles between relative and absolute line numbers automatically based on the cu
 
 ## Installation
 
-### Using [plug.kak](https://github.com/andreyorst/plug.kak) (recommended)
+### Using [plug.kak](https://github.com/robertmeta/plug.kak) (recommended)
 
 With plug.kak installed, add to your `kakrc` file:
 
