@@ -17,8 +17,7 @@ plug "evanrelf/number-toggle.kak"
 Download plugin:
 
 ```bash
-$ mkdir -p ~/.config/kak/plugins/
-$ curl -L https://raw.githubusercontent.com/evanrelf/number-toggle.kak/master/rc/number-toggle.kak -o ~/.config/kak/plugins/number-toggle.kak
+$ curl -L https://raw.githubusercontent.com/evanrelf/number-toggle.kak/master/rc/number-toggle.kak -o ~/.config/kak/plugins/number-toggle.kak --create-dirs
 ```
 
 Add to your `kakrc` file:
