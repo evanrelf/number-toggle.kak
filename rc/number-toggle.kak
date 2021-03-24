@@ -1,3 +1,5 @@
+provide-module number-toggle %{
+
 declare-option -docstring 'Line number highlighter parameters' str-list number_toggle_params
 
 declare-option -hidden str number_toggle_internal_state '-relative'
@@ -40,4 +42,6 @@ hook -always global ModeChange pop:insert:.* %{
   set-option window number_toggle_internal_state '-relative'
   number-toggle-refresh
   number-toggle-install-focus-hooks
+}
+
 }

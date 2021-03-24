@@ -11,7 +11,9 @@ line numbers are displayed in all other modes.
 With plug.kak installed, add to your `kakrc` file:
 
 ```kakoune
-plug "evanrelf/number-toggle.kak"
+plug "evanrelf/number-toggle.kak" config %{
+  require-module "number-toggle"
+}
 ```
 
 ### Manually
@@ -26,12 +28,13 @@ Add to your `kakrc` file:
 
 ```kakoune
 source ~/.config/kak/plugins/number-toggle.kak
+require-module "number-toggle"
 ```
 
 ## Options
 
 - `number_toggle_params` - Line number highlighter parameters (str-list, default
-- empty)
+  empty)
 
 ```kakoune
 # Example of enabling `-hlcursor` and `-separator ' '` parameters
