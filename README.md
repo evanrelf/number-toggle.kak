@@ -1,6 +1,8 @@
 # number-toggle.kak
 
-Toggles between relative and absolute line numbers automatically based on the current mode. Absolute line numbers are displayed in insert mode, and relative line numbers are displayed in all other modes.
+Toggles between relative and absolute line numbers automatically based on the
+current mode. Absolute line numbers are displayed in insert mode, and relative
+line numbers are displayed in all other modes.
 
 ## Installation
 
@@ -28,7 +30,8 @@ source ~/.config/kak/plugins/number-toggle.kak
 
 ## Options
 
-- `number_toggle_params` - Line number highlighter parameters (str-list, default empty)
+- `number_toggle_params` - Line number highlighter parameters (str-list, default
+- empty)
 
 ```kakoune
 # Example of enabling `-hlcursor` and `-separator ' '` parameters
