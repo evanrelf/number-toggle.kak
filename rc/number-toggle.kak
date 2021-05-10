@@ -5,7 +5,7 @@ declare-option -docstring 'Line number highlighter parameters' str-list number_t
 declare-option -hidden str number_toggle_internal_state '-relative'
 
 define-command -hidden number-toggle-refresh %{ evaluate-commands %sh{
-  printf '%s' "add-highlighter -override window/number-toggle number-lines $kak_opt_number_toggle_params $kak_opt_number_toggle_internal_state"
+  printf '%s' "add-highlighter -override window/number-toggle number-lines $kak_quoted_opt_number_toggle_params $kak_opt_number_toggle_internal_state"
 }}
 
 define-command -hidden number-toggle-install-focus-hooks %{
