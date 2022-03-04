@@ -28,20 +28,20 @@ hook -always global WinCreate .* %{
   set-option window number_toggle_internal_state '-relative'
   number-toggle-refresh
   number-toggle-install-focus-hooks
-}
 
-# Display absolute line numbers when entering insert mode
-hook -always global ModeChange push:.*:insert %{
-  set-option window number_toggle_internal_state ''
-  number-toggle-refresh
-  number-toggle-uninstall-focus-hooks
-}
+  # Display absolute line numbers when entering insert mode
+  hook -always window ModeChange push:.*:insert %{
+    set-option window number_toggle_internal_state ''
+    number-toggle-refresh
+    number-toggle-uninstall-focus-hooks
+  }
 
-# Display relative line numbers when leaving insert mode
-hook -always global ModeChange pop:insert:.* %{
-  set-option window number_toggle_internal_state '-relative'
-  number-toggle-refresh
-  number-toggle-install-focus-hooks
+  # Display relative line numbers when leaving insert mode
+  hook -always window ModeChange pop:insert:.* %{
+    set-option window number_toggle_internal_state '-relative'
+    number-toggle-refresh
+    number-toggle-install-focus-hooks
+  }
 }
 
 }
